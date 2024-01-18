@@ -5,6 +5,7 @@
 
     <application
         android:name=".Application"
+        android:label="Ingatkoding"
         android:allowBackup="false"
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"

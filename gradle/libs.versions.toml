@@ -11,13 +11,10 @@ androidx-activityCompose = "1.8.2"
 kotlinxCoroutinesCore = "1.7.3"
 ktorClientCore = "2.2.3"
 lifecycleViewmodelKtx = "2.6.2"
-mockitoCore = "5.7.0"
-mockitoKotlin = "3.2.0"
 navigationCompose = "2.7.6"
 sqlDelight = "2.0.0"
 buildKonfig = "0.15.1"
 mockmp = "1.15.0"
-kswift = "0.6.1"
 skie = "0.6.1"
 
 [libraries]
@@ -46,8 +43,6 @@ ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorCli
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktorClientCore" }
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktorClientCore" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorClientCore" }
-mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
-mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
 native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 
 [plugins]
@@ -57,7 +52,6 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
-buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig"}
-mockmp = { id = "org.kodein.mock.mockmp", version.ref = "mockmp"}
-skie = { id = "co.touchlab.skie", version.ref = "skie"}
-kswift = { id = "dev.icerock.moko.kswift", version.ref = "kswift"}
+buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
+mockmp = { id = "org.kodein.mock.mockmp", version.ref = "mockmp" }
+skie = { id = "co.touchlab.skie", version.ref = "skie" }

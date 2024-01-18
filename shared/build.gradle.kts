@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.mockmp)
-    alias(libs.plugins.kswift)
     alias(libs.plugins.skie)
 }
 
@@ -97,8 +96,4 @@ buildkonfig {
 
 mockmp {
     usesHelper = true
-}
-
-kswift {
-    install(dev.icerock.moko.kswift.plugin.feature.SealedToSwiftEnumFeature)
 }
