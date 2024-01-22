@@ -2,7 +2,7 @@
 //  ArticleDetailView.swift
 //  iosApp
 //
-//  Created by metro on 17/01/24.
+//  Created by labibmuhajir on 17/01/24.
 //  Copyright © 2024 orgName. All rights reserved.
 //
 
@@ -43,13 +43,13 @@ struct ArticleDetailView: View {
         ZStack(content: {
             switch onEnum(of: viewModel.articleState) {
             case .initial:
-                Text("")
+                VStack{}
             case .loading:
                 ProgressView()
             case .noData:
-                Text("")
+                Text("No Data")
             case .error(let error):
-                Text(error.message)
+                ErrorView(message: error.message, retry: error.retry)
             case .success(let state):
                 if let article = state.data as? ArticleDetail {
                     ScrollView {
@@ -59,7 +59,7 @@ struct ArticleDetailView: View {
                             AuthorView(author: article.author)
                             
                             HTMLText(htmlString: article.content)
-                        }.padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                        }.padding([.horizontal], 16)
                     }
                 }
             }

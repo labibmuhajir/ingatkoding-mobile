@@ -62,10 +62,15 @@ fun DetailArticleView(
             contentAlignment = Alignment.Center
         ) {
             when (state.value) {
-                is CommonState.Error -> Text(text = (state.value as CommonState.Error).message)
+                is CommonState.Error -> {
+                    val errorState = (state.value as CommonState.Error)
+
+                    ErrorView(message = errorState.message, retry = errorState.retry)
+                }
+
                 CommonState.Initial -> {}
                 CommonState.Loading -> CircularProgressIndicator()
-                CommonState.NoData -> {}
+                CommonState.NoData -> Text("No Data")
                 is CommonState.Success -> {
                     val detail = (state.value as CommonState.Success<ArticleDetail>).data
 

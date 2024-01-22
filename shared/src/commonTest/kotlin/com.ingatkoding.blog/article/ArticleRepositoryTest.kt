@@ -3,6 +3,7 @@ package com.ingatkoding.blog.article
 import com.ingatkoding.blog.model.Article
 import com.ingatkoding.blog.model.ArticleDetail
 import com.ingatkoding.blog.model.Author
+import com.ingatkoding.blog.model.Paginated
 import com.ingatkoding.blog.service.IIngatkodingService
 import com.ingatkoding.blog.service.MockIIngatkodingService
 import kotlinx.coroutines.runBlocking
@@ -33,13 +34,16 @@ class ArticleRepositoryTest {
     @Test
     fun testGetArticle() {
         runBlocking {
-            val expected = listOf(
+            val articles = listOf(
                 Article(1, "", "", listOf(), Author("", "", ""), "")
             )
+            val expected = Paginated(
+                1, 1, articles
+            )
             mocker.everySuspending {
-                ingatkodingService.getArticles()
+                ingatkodingService.getArticles(0, 5)
             } returns expected
-            val actual = articleRepository.getArticles()
+            val actual = articleRepository.getArticles(0)
 
             assertEquals(expected, actual)
         }

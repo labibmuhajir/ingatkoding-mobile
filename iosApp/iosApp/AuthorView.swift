@@ -2,7 +2,7 @@
 //  AuthorView.swift
 //  iosApp
 //
-//  Created by metro on 18/01/24.
+//  Created by labibmuhajir on 18/01/24.
 //  Copyright © 2024 orgName. All rights reserved.
 //
 

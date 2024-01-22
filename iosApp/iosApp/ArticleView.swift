@@ -2,7 +2,7 @@
 //  ArticleView.swift
 //  iosApp
 //
-//  Created by metro on 16/01/24.
+//  Created by labibmuhajir on 16/01/24.
 //  Copyright © 2024 orgName. All rights reserved.
 //
 
@@ -45,28 +45,24 @@ struct ArticleView: View {
             ZStack(content: {
                 switch onEnum(of: viewModel.articleState) {
                 case .initial:
-                    Text("initial")
+                    VStack{}
                 case .loading:
                     ProgressView()
                 case .noData:
                     Text("no data")
-                case .success(let articles):
-                    if let articles: [Article] = articles.data as? [Article] {
-                        List(articles) { article in
-                            NavigationLink {
-                                ArticleDetailView(viewModel: .init(), path: article.detailPath)
-                            } label: {
-                                ArticleItemView(article: article)
-                            }
+                case .success(let articleState):
+                    if let paging: Paging = articleState.data as? Paging<Article>, let articles: [Article] = paging.currentData as? [Article]  {
+                        
+                            
+                        SuccessContent(articles: articles, nextState: paging.nextState) {
+                            viewModel.articleViewModel.getNextArticle()
                         }
                     }
-                    
                 case .error(let error):
-                    Text(error.message)
-                    
+                    ErrorView(message: error.message, retry: error.retry)
                 }
                 
-            }).navigationTitle("Article")
+            }).navigationTitle("Article").navigationBarTitleDisplayMode(.inline)
             .onAppear{
                 viewModel.startObserveData()
                 viewModel.articleViewModel.getArticles()
@@ -77,12 +73,44 @@ struct ArticleView: View {
     }
 }
 
+struct SuccessContent: View {
+    let articles: [Article]
+    let nextState: NextState
+    let onLoadNext: () -> Void
+    
+    var body: some View {
+        ScrollView {
+            LazyVStack {
+                ForEach(articles) { article in
+                    NavigationLink {
+                        ArticleDetailView(viewModel: .init(), path: article.detailPath)
+                    } label: {
+                        ArticleItemView(article: article)
+                    }
+                }
+                
+                switch onEnum(of: nextState) {
+                case .loading:
+                    VStack(alignment: HorizontalAlignment.center) {
+                        ProgressView()
+                    }.onAppear(perform: onLoadNext)
+                    
+                case .error(let error):
+                    ErrorView(message: error.message, retry: error.retry)
+                case .endPage:
+                    Spacer()
+                }
+            }.padding([.horizontal], 16).id(1)
+        }
+    }
+}
+
 struct ArticleItemView: View {
     let article: Article
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(article.title).font(.title2).bold().multilineTextAlignment(.leading)
+            Text(article.title).font(.title2).bold().multilineTextAlignment(.leading).foregroundStyle(.black)
             
             AuthorView(author: article.author)
             

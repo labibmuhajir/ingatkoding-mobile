@@ -24,7 +24,7 @@ class ArticleDetailViewModel(private val articleRepository: IArticleRepository) 
 
                 _articleState.emit(CommonState.Success(articleDetail))
             } catch (e: Exception) {
-                _articleState.emit(CommonState.Error(e.message ?: "error") {
+                _articleState.emit(CommonState.Error(e.message ?: "Error") {
                     getArticle(path)
                 })
             }
